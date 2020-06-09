@@ -1,14 +1,19 @@
 import React from 'react';
 import './App.css';
-import { buildReplyText } from 'line-message-builder';
+import { LIFFMessages } from 'liff-type';
 
-function App: React.FC = () => {
+const messages: LIFFMessages = [{
+  'type': 'text',
+  'text': 'Send Message',
+}]
+
+const App: React.FC = () => {
   const sendMessage = () => {
     liff.init({ liffId: process.env.REACT_APP_LIFF_ID as string }).then(() => {
       if (!liff.isLoggedIn()) {
         liff.login({})
       }
-      liff.sendMessages(buildReplyText(['Send Message']))
+      liff.sendMessages(messages)
     })
   }
   return (
